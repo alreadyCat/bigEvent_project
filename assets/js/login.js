@@ -19,7 +19,7 @@ $(function(){
     form.verify({
         pwd:[/^[\S]{6,12}$/,'密码必须6到12位，且不能出现空格'],
         repwd:function(value){
-            var pw = document.querySelector('.reg [name="password"]').value
+            var pw = $('.reg [name="password"]').val()
             if(value !== pw){
                 return '两次密码不一致'
             }
@@ -29,7 +29,9 @@ $(function(){
     //监听注册表单提交请求
     $('#form-reg').on('submit',function(e){
         e.preventDefault()
-        $.post('/api/reguser',{username:$('#form-reg [name="username"]').val(),password:$('#form-reg [name="username"]').val()},function(res){
+        // console.log($('#form-reg [name="username"]').val());
+        // console.log($('#form-reg [name="username"]').val());
+        $.post('/api/reguser',{username:$('#form-reg [name="username"]').val(),password:$('#form-reg [name="password"]').val()},function(res){
             if(res.status !== 0){
                 return layer.msg(res.message);
             }
